@@ -10,7 +10,7 @@
         "production": "mix --production"
     },
     "dependencies": {
-        "bootstrap": "~5.1.0",
+        "bootstrap": "^5.3.3",
         "dotenv": "^16.4.5",
         "glob": "^10.3.10"
     },
