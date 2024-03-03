@@ -17,27 +17,6 @@ class AuthController extends BaseController
         return view('auth.login');
     }
 
-    public function login(Request $request)
-    {
-        $data = $request->validate([
-            "email" => ["required", "email", "string"],
-            "password" => ["required"]
-        ]);
-
-        if(auth("web")->attempt($data)) {
-            return redirect(route("home"));
-        }
-
-        return redirect(route("login"))->withErrors(["email" => "Пользователь не найден, либо данные введены не правильно"]);
-    }
-
-    public function logout()
-    {
-        auth("web")->logout();
-
-        return redirect(route("home"));
-    }
-
     public function showRegisterForm()
     {
         return view("auth.register");
@@ -46,6 +25,20 @@ class AuthController extends BaseController
     public function showForgotForm()
     {
         return view("auth.forgot");
+    }
+
+    public function login(Request $request)
+    {
+        $data = $request->validate([
+            "email" => ["required", "email", "string"],
+            "password" => ["required"]
+        ]);
+
+        if(auth("web")->attempt($data)) {
+            return redirect(route("dashboard"));
+        }
+
+        return redirect(route("login"))->withErrors(["email" => "Пользователь не найден, либо данные введены не правильно"]);
     }
 
     public function forgot(Request $request)
@@ -63,7 +56,7 @@ class AuthController extends BaseController
 
         Mail::to($user)->send(new ForgotPassword($password));
 
-        return redirect(route("home"));
+        return redirect(route("dashboard"));
     }
 
     public function register(Request $request)
@@ -87,5 +80,12 @@ class AuthController extends BaseController
         }
 
         return redirect(route("home"));
+    }
+
+    public function logout()
+    {
+        auth("web")->logout();
+
+        return redirect(route("dashboard"));
     }
 }

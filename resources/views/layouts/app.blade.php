@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    @include('panels/styles')
 </head>
 <body class="vertical-layout vertical-menu-modern blank-page" data-menu="vertical-menu-modern" data-col="blank-page" data-framework="laravel" data-asset-path="{{ asset('/') }}">
 <div class="app-content content">
@@ -25,6 +26,7 @@
         </div>
     </div>
 </div>
+@include('panels/scripts')
 <script type="text/javascript">
     $(window).on('load', function () {
         if (feather) {
