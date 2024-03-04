@@ -16,8 +16,8 @@ Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])-
 
 Route::middleware("auth:web")->group(function () {
     Route::get('/dashboard', function () {
-        return view('welcome');
-    })->name('dashboard');
+        return view('dashboard');
+    });
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 });
 

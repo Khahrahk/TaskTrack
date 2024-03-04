@@ -1,4 +1,4 @@
-const mix = require('laravel-mix')
+const mix = require('laravel-mix');
 require('dotenv').config()
 
 /*
@@ -37,15 +37,12 @@ mixAssetsDir('scss/**/!(_)*.scss', (src, dest) =>
 )
 
 // script js
-mixAssetsDir('js/scripts/**/*.js', (src, dest) => mix.scripts(src, dest))
+mixAssetsDir('js/pages/**/*.js', (src, dest) => mix.scripts(src, dest))
 
 // plugins js
 mixAssetsDir('js/plugins/**/*.js', (src, dest) => mix.scripts(src, dest))
 
-mixAssetsDir('js/**/*.js', (src, dest) => mix.scripts(src, dest))
-
 mix.copyDirectory('resources/images', 'public/images')
 mix.copyDirectory('resources/data', 'public/data')
 
-mix
-    .version()
+mix.js(['resources/js/app.js', 'resources/js/bootstrap.js'], 'public/js')
