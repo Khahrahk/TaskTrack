@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\User;
+use App\Models\UserAccount;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -73,13 +75,24 @@ class AuthController extends BaseController
             "password" => bcrypt($data["password"])
         ]);
 
+        $account = Account::create([
+            'creator' => $user->id,
+            "token" => bcrypt($user->password)
+        ]);
+
+        $userAccount = UserAccount::create([
+            'user_id' => $user->id,
+            'user_type' => 3,
+            "account_id" => $account->id
+        ]);
+
         if($user) {
             //event(new Registered($user));
 
             auth("web")->login($user);
         }
 
-        return redirect(route("home"));
+        return redirect(route("dashboard"));
     }
 
     public function logout()
