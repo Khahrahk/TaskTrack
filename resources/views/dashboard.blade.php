@@ -1,6 +1,6 @@
 @extends('layouts.contentLayoutMaster')
 
-@section('title', 'Восстановление пароля')
+@section('title', 'Dashboard')
 
 @section('vendor-style')
 @endsection

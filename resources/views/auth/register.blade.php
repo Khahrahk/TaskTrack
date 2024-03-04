@@ -59,7 +59,7 @@
                     <div class="header d-lg-flex flex-column col-lg-12 align-items-center justify-content-center pb-4">
                         <h1><span class="label">TaskTrack</span></h1>
                     </div>
-                    <form method="POST" action="{{ route("login_process") }}" class="card w-100">
+                    <form method="POST" action="{{ route("register_process") }}" class="card w-100">
                         <h5 class="card-header d-flex flex-column align-items-center justify-content-center">Sign up</h5>
                         <div class="card-body p-3">
                             @csrf

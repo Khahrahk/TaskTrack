@@ -15,10 +15,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])->middleware('guest');
 
 Route::middleware("auth:web")->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/accounts', [\App\Http\Controllers\AccountController::class, 'index'])->name('accounts');
+    Route::post('/create_account', [\App\Http\Controllers\AccountController::class, 'create_account'])->name('create_account');
+
+    Route::get('/projects', [\App\Http\Controllers\ProjectController::class, 'index'])->name('projects');
+    Route::post('/create_project', [\App\Http\Controllers\ProjectController::class, 'create_project'])->name('create_project');
+
+    Route::get('/issues', [\App\Http\Controllers\IssueController::class, 'index'])->name('issues');
+    Route::post('/create_issue', [\App\Http\Controllers\ProjectController::class, 'create_issue'])->name('create_issue');
+
+    Route::get('/agiles', [\App\Http\Controllers\AgileController::class, 'index'])->name('agiles');
 });
 
 Route::middleware("guest:web")->group(function () {
