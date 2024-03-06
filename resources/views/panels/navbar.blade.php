@@ -10,17 +10,23 @@
                     <a class="nav-link active" aria-current="page" href="{{route('dashboard')}}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('projects')}}">Projects</a>
+                    <a class="nav-link" href="{{route('workspaces')}}">Workspaces</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('issues')}}">Issues</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('agiles')}}">Agile boards</a>
-                </li>
+                @if(!auth()->user()->userWorkspace->isEmpty())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('projects')}}">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('issues')}}">Issues</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('agiles')}}">Agile boards</a>
+                    </li>
+                @endif
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Profile
+                        {{auth()->user()->name}}
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Settings</a></li>

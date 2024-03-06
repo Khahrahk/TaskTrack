@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_accounts', function (Blueprint $table) {
+        Schema::create('workspaces', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class,'user_id');
-            $table->integer('user_type')->default(0);
-            $table->foreignIdFor(\App\Models\Account::class,'account_id');
+            $table->string('name');
+            $table->string('token');
+            $table->foreignIdFor(\App\Models\User::class,'creator');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_accounts');
+        Schema::dropIfExists('workspaces');
     }
 };

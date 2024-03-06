@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(\App\Models\Account::class,'account_id');
+            $table->foreignIdFor(\App\Models\Workspace::class,'workspace_id');
             $table->timestamps();
         });
     }

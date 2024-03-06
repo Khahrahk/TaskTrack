@@ -19,14 +19,17 @@ Route::middleware("auth:web")->group(function () {
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/accounts', [\App\Http\Controllers\AccountController::class, 'index'])->name('accounts');
-    Route::post('/create_account', [\App\Http\Controllers\AccountController::class, 'create_account'])->name('create_account');
+    Route::get('/workspaces', [\App\Http\Controllers\WorkspaceController::class, 'index'])->name('workspaces');
+    Route::post('/workspace_create', [\App\Http\Controllers\WorkspaceController::class, 'create'])->name('workspace_create');
+    Route::post('/workspace_join', [\App\Http\Controllers\WorkspaceController::class, 'join'])->name('workspace_join');
 
     Route::get('/projects', [\App\Http\Controllers\ProjectController::class, 'index'])->name('projects');
-    Route::post('/create_project', [\App\Http\Controllers\ProjectController::class, 'create_project'])->name('create_project');
+    Route::post('/project_create', [\App\Http\Controllers\ProjectController::class, 'create'])->name('project_create');
 
     Route::get('/issues', [\App\Http\Controllers\IssueController::class, 'index'])->name('issues');
-    Route::post('/create_issue', [\App\Http\Controllers\ProjectController::class, 'create_issue'])->name('create_issue');
+    Route::post('/issue_create', [\App\Http\Controllers\IssueController::class, 'create'])->name('issue_create');
+    Route::post('/issue_archive', [\App\Http\Controllers\IssueController::class, 'archive'])->name('issue_archive');
+    Route::post('/issue_delete', [\App\Http\Controllers\IssueController::class, 'delete'])->name('issue_delete');
 
     Route::get('/agiles', [\App\Http\Controllers\AgileController::class, 'index'])->name('agiles');
 });

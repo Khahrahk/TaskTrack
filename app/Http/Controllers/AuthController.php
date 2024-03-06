@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
+use App\Models\Workspace;
 use App\Models\User;
-use App\Models\UserAccount;
+use App\Models\UserWorkspace;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -73,17 +73,6 @@ class AuthController extends BaseController
             "name" => $data["name"],
             "email" => $data["email"],
             "password" => bcrypt($data["password"])
-        ]);
-
-        $account = Account::create([
-            'creator' => $user->id,
-            "token" => bcrypt($user->password)
-        ]);
-
-        $userAccount = UserAccount::create([
-            'user_id' => $user->id,
-            'user_type' => 3,
-            "account_id" => $account->id
         ]);
 
         if($user) {

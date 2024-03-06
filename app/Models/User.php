@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Presenters\UserPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,8 +45,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function userAccount(): HasMany
+    public function userWorkspace(): HasMany
     {
-        return $this->HasMany(UserAccount::class, 'user_id', 'id');
+        return $this->HasMany(UserWorkspace::class, 'user_id', 'id');
+    }
+
+    public function presenter(): UserPresenter
+    {
+        return new UserPresenter($this);
     }
 }
