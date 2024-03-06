@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Presenters\IssuePresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,5 +27,10 @@ class Issue extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class, 'id', 'project_id');
+    }
+
+    public function presenter(): IssuePresenter
+    {
+        return new IssuePresenter($this);
     }
 }
