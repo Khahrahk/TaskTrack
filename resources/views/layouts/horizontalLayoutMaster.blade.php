@@ -5,6 +5,7 @@
       data-framework="laravel"
       data-asset-path="{{ asset('/')}}">
 
+@include('panels.navbar')
 <div class="app-content content" style="height: 100%;">
     <div class="content-area-wrapper h-100" style="height: 100%;">
         <div class="d-flex flex-column" style="height: 100%;">
@@ -16,7 +17,7 @@
                 </div>
                 <div class="d-flex flex-column w-100">
                     <div class="d-flex flex-row w-100">
-                        @include('panels.navbar')
+                        @yield('header')
                     </div>
                     <div class="d-flex flex-row" style="height: 100%">
                         <div class="content-wrapper w-100">

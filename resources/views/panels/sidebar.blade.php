@@ -7,7 +7,7 @@
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
             <li class="nav-item">
                 <a href="#" class="nav-link py-2 border-bottom" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home" style="border-radius: 0">
-                    <svg class="bi" width="32" height="32" role="img" aria-label="Home"><use xlink:href="#home"></use></svg>
+                    <svg class="bi" width="30" height="30" role="img" aria-label="Home"><use xlink:href="#home"></use></svg>
                 </a>
             </li>
             <li>
