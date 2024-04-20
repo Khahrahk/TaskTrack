@@ -47,6 +47,5 @@ mixAssetsDir('js/pages/**/*.js', (src, dest) => mix.scripts(src, dest))
 mixAssetsDir('js/plugins/**/*.js', (src, dest) => mix.scripts(src, dest))
 
 mix.copyDirectory('resources/images', 'public/images')
-mix.copyDirectory('resources/data', 'public/data')
 
 mix.js(['resources/js/app.js', 'resources/js/bootstrap.js'], 'public/js')
