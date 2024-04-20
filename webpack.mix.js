@@ -36,6 +36,10 @@ mixAssetsDir('scss/**/!(_)*.scss', (src, dest) =>
     mix.sass(src, dest.replace(/(\\|\/)scss(\\|\/)/, '$1css$2').replace(/\.scss$/, '.css'), {sassOptions})
 )
 
+// vendors
+mixAssetsDir('vendors/js/**/*.js', (src, dest) => mix.scripts(src, dest))
+mixAssetsDir('vendors/css/**/*.css', (src, dest) => mix.copy(src, dest))
+
 // script js
 mixAssetsDir('js/pages/**/*.js', (src, dest) => mix.scripts(src, dest))
 
