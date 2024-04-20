@@ -44,3 +44,5 @@ Route::middleware("guest:web")->group(function () {
     Route::get('/forgot', [\App\Http\Controllers\AuthController::class, 'showForgotForm'])->name('forgot');
     Route::post('/forgot_process', [\App\Http\Controllers\AuthController::class, 'forgot'])->name('forgot_process');
 });
+
+Route::get('manifest.json', \App\Http\Controllers\WebmanifestController::class)->name('webmanifest');

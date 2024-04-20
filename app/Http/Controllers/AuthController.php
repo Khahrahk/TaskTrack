@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Workspace;
 use App\Models\User;
-use App\Models\UserWorkspace;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class AuthController extends BaseController
@@ -36,7 +35,7 @@ class AuthController extends BaseController
             "password" => ["required"]
         ]);
 
-        if(auth("web")->attempt($data)) {
+        if(Auth::attempt($data)) {
             return redirect(route("dashboard"));
         }
 
@@ -75,9 +74,9 @@ class AuthController extends BaseController
             "password" => bcrypt($data["password"])
         ]);
 
-        if($user) {
-            //event(new Registered($user));
+        $user->createToken('apiToken')->plainTextToken;
 
+        if($user) {
             auth("web")->login($user);
         }
 

@@ -72,36 +72,36 @@
 @endsection
 
 @section('content')
-    {{--    <div class="header d-flex flex-column col-lg-12 align-items-center justify-content-center pb-4 pt-4">--}}
-    {{--        <div class="d-flex flex-column w-100 align-items-center justify-content-center">--}}
-    {{--            <h1 class="d-flex flex-row"><span class="label">Projects</span></h1>--}}
-    {{--        </div>--}}
-    {{--        <div class="d-flex flex-row pt-3 w-100 align-items-center justify-content-center gap-3">--}}
-    {{--            <x-button outline primary label="Create" class="col-1" data-bs-toggle="modal" data-bs-target="#create"/>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-    {{--    <div class="d-flex flex-column col-12 align-items-center pb-4 pt-4">--}}
-    {{--        @if(!empty(auth()->user()->userWorkspace))--}}
-    {{--            @foreach(auth()->user()->userWorkspace as $workspace)--}}
-    {{--                @if(!empty($workspace->workspace->projects))--}}
-    {{--                    @foreach($workspace->workspace->projects as $project)--}}
-    {{--                        <div class="d-flex flex-column col-6 p-3">--}}
-    {{--                            <div class="d-flex flex-row w-100 align-items-center gap-3">--}}
-    {{--                                <div class="d-flex flex-column w-10">--}}
-    {{--                                    <div class="img-holder">--}}
-    {{--                                        {{ $project->presenter()->initials }}--}}
-    {{--                                    </div>--}}
-    {{--                                </div>--}}
-    {{--                                <div class="d-flex flex-column w-50">--}}
-    {{--                                    <span><h1>{{ $project->name }}</h1></span>--}}
-    {{--                                </div>--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-    {{--                    @endforeach--}}
-    {{--                @endif--}}
-    {{--            @endforeach--}}
-    {{--        @endif--}}
-    {{--    </div>--}}
+{{--        <div class="header d-flex flex-column col-lg-12 align-items-center justify-content-center pb-4 pt-4">--}}
+{{--            <div class="d-flex flex-column w-100 align-items-center justify-content-center">--}}
+{{--                <h1 class="d-flex flex-row"><span class="label">Projects</span></h1>--}}
+{{--            </div>--}}
+{{--            <div class="d-flex flex-row pt-3 w-100 align-items-center justify-content-center gap-3">--}}
+{{--                <x-button outline primary label="Create" class="col-1" data-bs-toggle="modal" data-bs-target="#create"/>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <div class="d-flex flex-column col-12 align-items-center pb-4 pt-4">--}}
+{{--            @if(!empty(auth()->user()->userWorkspace))--}}
+{{--                @foreach(auth()->user()->userWorkspace as $workspace)--}}
+{{--                    @if(!empty($workspace->workspace->projects))--}}
+{{--                        @foreach($workspace->workspace->projects as $project)--}}
+{{--                            <div class="d-flex flex-column col-6 p-3">--}}
+{{--                                <div class="d-flex flex-row w-100 align-items-center gap-3">--}}
+{{--                                    <div class="d-flex flex-column w-10">--}}
+{{--                                        <div class="img-holder">--}}
+{{--                                            {{ $project->presenter()->initials }}--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="d-flex flex-column w-50">--}}
+{{--                                        <span><h1>{{ $project->name }}</h1></span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+{{--            @endif--}}
+{{--        </div>--}}
     <div class="card m-5 mt-4">
         <div class="card-body">
             <span>Projects</span>
@@ -109,11 +109,6 @@
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -121,11 +116,7 @@
                 <tfoot>
                 <tr>
                     <td>New list</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+
                 </tr>
                 </tfoot>
             </table>
@@ -181,10 +172,9 @@
     <script>
 
         var table = $('.table').dataTable({
-            "bPaginate": false,
+            // "bPaginate": false,
             "bInfo": false,
             "bFilter": false,
-            processing: true,
             serverSide: true,
             ajax: {
                 async: true,
@@ -204,7 +194,7 @@
             autoWidth: false,
             columnDefs: [
                 {
-                    targets: [0, 1, 2, 3, 4, 5, 6],
+                    targets: [0],
                     className: 'not-mobile-l none',
                     render: function (data) {
                         if (data === null || data.length === 0) {
@@ -216,13 +206,7 @@
                 },
             ],
             columns: [
-                {data: 'fullName', width: '250px'},
-                {data: 'department', width: '300px'},
-                {data: 'group', width: '350px'},
-                {data: 'team', width: '120px'},
-                {data: 'email', width: '150px'},
-                {data: 'phone', width: '130px'},
-                {data: 'telegram', width: '130px'},
+                {data: 'name', width: '250px'},
             ],
             order: [[0  , 'asc']],
             dom: 'rt<"datatables-footer d-flex flex-column flex-sm-row align-items-center gap-10px justify-content-between w-100"pl>',

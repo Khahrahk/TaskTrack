@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
+//Route::middleware('auth:web')->group(function () {
+    Route::prefix('user')->as('user.')->group(function () {
+        Route::get('/', fn(Request $request) => $request->user());
+    });
     Route::get('projects', [\App\Http\Controllers\ProjectController::class, 'projectList'])->name('project.list');
-});
+//});

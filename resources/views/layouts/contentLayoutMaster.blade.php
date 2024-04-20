@@ -11,7 +11,7 @@
     <title>@yield('title') - {{ config('app.name') }}</title>
     <link rel="apple-touch-icon" href="{{ asset('images/ico/favicon.ico') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/ico/favicon.ico') }}">
-    <link rel="manifest" href="" crossorigin="use-credentials" />
+    <link rel="manifest" href="{{ route('webmanifest') }}" crossorigin="use-credentials" />
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="{{ config('app.name') }}">
