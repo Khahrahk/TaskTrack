@@ -8,9 +8,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{route('dashboard')}}">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('workspaces')}}">Workspaces</a>
-                </li>
                 @if(!auth()->user()->userWorkspace->isEmpty())
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('projects')}}">Projects</a>
@@ -30,6 +27,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{route('workspaces')}}">Workspaces</a></li>
                     </ul>
                 </li>
             </ul>

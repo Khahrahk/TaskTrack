@@ -10,9 +10,9 @@
 @endsection
 
 @section('header')
-    <nav class="navbar navbar-expand-lg bg-light d-flex flex-row w-100 ps-3 pb-1"
-         style="margin: 0; box-shadow: none; border-bottom:  1px solid rgba(0, 0, 0, 0.1)">
-        <button type="button" id="sidebarCollapse" class="btn btn-info py-3"><i class="fa fa-align-justify"></i></button>
+    <nav class="navbar navbar-page navbar-expand-lg bg-white d-flex flex-row w-100 ps-3 pb-1"
+         style="margin: 0; box-shadow: none; border-bottom:  1px solid rgba(0, 0, 0, 0.1); height: 45px">
+        <x-button class="toggle-right close" size="sm" monochrome outline iconRight="burger-menu-svgrepo-com"></x-button>
 
         <div class="container-fluid">
 

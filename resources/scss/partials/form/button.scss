@@ -46,7 +46,7 @@
 
             &:not(:disabled):not(.disabled):hover {
                 background: $info-400;
-                box-shadow: 0 0 10px rgba(103, 231, 240, 0.5);
+                box-shadow: 0 0 5px rgba(103, 231, 240, 0.5);
             }
 
             &:focus-visible:not(:disabled):not(.disabled), &:focus:not(:disabled):not(.disabled) {
@@ -69,7 +69,7 @@
 
             &:not(:disabled):not(.disabled):hover {
                 background: $monochrome-700;
-                box-shadow: 0 0 10px rgba(51, 51, 51, 0.25);
+                box-shadow: 0 0 5px rgba(51, 51, 51, 0.25);
             }
 
             &:focus-visible:not(:disabled):not(.disabled), &:focus:not(:disabled):not(.disabled) {
@@ -92,7 +92,7 @@
 
             &:not(:disabled):not(.disabled):hover {
                 background: $danger-400;
-                box-shadow: 0 0 10px rgba(234, 84, 85, 0.25);
+                box-shadow: 0 0 5px rgba(234, 84, 85, 0.25);
             }
 
             &:focus-visible:not(:disabled):not(.disabled), &:focus:not(:disabled):not(.disabled) {
@@ -448,7 +448,7 @@
 
             &:not(:disabled):not(.disabled):hover {
                 background: $accent-400;
-                box-shadow: 0 0 10px rgba(103, 231, 240, 0.5);
+                box-shadow: 0 0 5px rgba(103, 231, 240, 0.5);
 
                 &:active {
                     background: $accent-600;
@@ -474,7 +474,7 @@
 
             &:not(:disabled):not(.disabled):hover {
                 background: $monochrome-700;
-                box-shadow: 0 0 10px rgba(51, 51, 51, 0.25);
+                box-shadow: 0 0 5px rgba(51, 51, 51, 0.25);
 
                 &:active {
                     background: $monochrome-900;
@@ -500,7 +500,7 @@
 
             &:not(:disabled):not(.disabled):hover {
                 background: $danger-400;
-                box-shadow: 0 0 10px rgba(234, 84, 85, 0.25);
+                box-shadow: 0 0 5px rgba(234, 84, 85, 0.25);
 
                 &:active {
                     background: $danger-600;
@@ -831,7 +831,7 @@
         background: $accent-50;
         color: $accent-300;
         border: 1px solid $accent-300;
-        box-shadow: 0 0 16px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
     }
 
     &:focus-visible:not(:disabled) {
@@ -1069,7 +1069,7 @@
 
                 &:hover {
                     background: $accent-400;
-                    box-shadow: 0 0 10px rgba(103, 231, 240, 0.5);
+                    box-shadow: 0 0 5px rgba(103, 231, 240, 0.5);
                 }
 
                 &:focus-visible:not(:disabled):not(.disabled), &:focus:not(:disabled):not(.disabled) {
@@ -1101,7 +1101,7 @@
 
                 &:hover {
                     background: $monochrome-700;
-                    box-shadow: 0 0 10px rgba(51, 51, 51, 0.25);
+                    box-shadow: 0 0 5px rgba(51, 51, 51, 0.25);
                 }
 
                 &:focus-visible:not(:disabled):not(.disabled), &:focus:not(:disabled):not(.disabled) {
@@ -1133,7 +1133,7 @@
 
                 &:hover {
                     background: $danger-400;
-                    box-shadow: 0 0 10px rgba(234, 84, 85, 0.25);
+                    box-shadow: 0 0 5px rgba(234, 84, 85, 0.25);
                 }
 
                 &:focus-visible:not(:disabled):not(.disabled), &:focus:not(:disabled):not(.disabled) {
@@ -1578,7 +1578,7 @@
 
             &:hover:not(:disabled):not(.disabled):not(.show):not(:active) {
                 background: $accent-400;
-                box-shadow: 0 0 10px rgba(103, 231, 240, 0.5);
+                box-shadow: 0 0 5px rgba(103, 231, 240, 0.5);
             }
 
             &:focus-visible:not(:disabled):not(.disabled) {
@@ -1599,7 +1599,7 @@
 
             &:hover:not(:disabled):not(.disabled):not(.show):not(:active) {
                 background: $monochrome-700;
-                box-shadow: 0 0 10px rgba(51, 51, 51, 0.25);
+                box-shadow: 0 0 5px rgba(51, 51, 51, 0.25);
             }
 
             &:focus-visible:not(:disabled):not(.disabled) {
@@ -1620,7 +1620,7 @@
 
             &:hover:not(:disabled):not(.disabled):not(.show):not(:active) {
                 background: $danger-400;
-                box-shadow: 0 0 10px rgba(234, 84, 85, 0.25);
+                box-shadow: 0 0 5px rgba(234, 84, 85, 0.25);
             }
 
             &:focus-visible:not(:disabled):not(.disabled) {
@@ -1954,7 +1954,7 @@
 
             &:hover:not(:disabled):not(.disabled) {
                 background: $accent-400;
-                box-shadow: 0 0 10px rgba(103, 231, 240, 0.5);
+                box-shadow: 0 0 5px rgba(103, 231, 240, 0.5);
             }
 
             &:focus-visible:not(:disabled):not(.disabled) {
@@ -1971,7 +1971,7 @@
 
             &:hover:not(:disabled):not(.disabled) {
                 background: $monochrome-400;
-                box-shadow: 0 0 10px rgba(51, 51, 51, 0.25);
+                box-shadow: 0 0 5px rgba(51, 51, 51, 0.25);
             }
 
             &:focus-visible:not(:disabled):not(.disabled) {
@@ -1988,7 +1988,7 @@
 
             &:hover:not(:disabled):not(.disabled) {
                 background: $danger-400;
-                box-shadow: 0 0 10px rgba(234, 84, 85, 0.25);
+                box-shadow: 0 0 5px rgba(234, 84, 85, 0.25);
             }
 
             &:focus-visible:not(:disabled):not(.disabled) {
@@ -2005,7 +2005,7 @@
 
             &:hover:not(:disabled):not(.disabled) {
                 background: $warning-400;
-                box-shadow: 0 0 10px rgba(255, 159, 67, 0.35);
+                box-shadow: 0 0 5px rgba(255, 159, 67, 0.35);
             }
 
             &:focus-visible:not(:disabled):not(.disabled) {
@@ -2022,7 +2022,7 @@
 
             &:hover:not(:disabled):not(.disabled) {
                 background: $success-400;
-                box-shadow: 0 0 10px rgba(40, 199, 111, 0.3);
+                box-shadow: 0 0 5px rgba(40, 199, 111, 0.3);
             }
 
             &:focus-visible:not(:disabled):not(.disabled) {
