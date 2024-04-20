@@ -1,32 +1,48 @@
-<nav id="sidebar" class="d-flex flex-column" style="height: 100%;">
-    <div class="d-flex flex-column flex-shrink-0 bg-light border-end" style="width: 3.5rem; height: 100%;">
-{{--        <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">--}}
-{{--            <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>--}}
-{{--            <span class="visually-hidden">Icon-only</span>--}}
-{{--        </a>--}}
-        <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-            <li class="nav-item">
-                <a href="#" class="nav-link py-2 border-bottom" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home" style="border-radius: 0">
-                    <svg class="bi" width="32" height="32" role="img" aria-label="Home"><use xlink:href="#home"></use></svg>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link py-3" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                    <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"></use></svg>
-                </a>
-            </li>
-        </ul>
-        <div class="dropdown border-top">
-            <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
-            </a>
-            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
-            </ul>
+<nav class="d-flex flex-column sidebar bg-light border-end h-100" style="width: 220px;">
+    <header class="d-flex flex-row border-bottom" style="height: 45px !important;">
+        <div class="d-flex flex-row w-100 ps-4 pt-2 pb-1 px-3 justify-content-between align-items-center"
+             style="height: 45px !important;">
+            <div class="d-flex flex-column workspace-actions">
+                <span class="d-flex flex-row" style="font-size: 30px; font-weight: 300">T</span>
+            </div>
+            <div class="d-flex flex-column button-close">
+                <x-button class="toggle-left" size="sm" monochrome outline
+                          iconRight="burger-menu-svgrepo-com"></x-button>
+            </div>
+        </div>
+    </header>
+    <div class="d-flex flex-column menu-bar justify-content-between h-100 w-100">
+        <div class="menu d-flex flex-row w-100">
+            <div class="d-flex flex-column gap-3 w-100 ps-4 pt-3">
+                <div class="d-flex flex-row justify-content-start align-items-center w-100">
+                    <a href="#" class="d-flex flex-row gap-2 align-items-center w-100">
+                        <i class="bx bx-home-alt icon fs-5"></i>
+                        <span class="d-flex flex-column text nav-text">Dashboard</span>
+                    </a>
+                </div>
+                <div class="d-flex justify-content-start align-items-center w-100">
+                    <a href="#" class="d-flex flex-row gap-2 align-items-center">
+                        <i class="d-flex flex-column bx bx-folder icon fs-5"></i>
+                        <span class="d-flex flex-column text nav-text">Projects</span>
+                    </a>
+                </div>
+                <div class="d-flex justify-content-start align-items-center w-100">
+                    <a href="#" class="d-flex flex-row gap-2 align-items-center">
+                        <i class="d-flex flex-column bx bx-task icon fs-5"></i>
+                        <span class="d-flex flex-column text nav-text">Issues</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row bottom-content">
+            <div class="d-flex flex-column gap-3 w-100 ps-4 pb-3">
+                <div class="d-flex flex-row justify-content-start align-items-center w-100">
+                    <a href="#" class="d-flex flex-row gap-2 align-items-center w-100">
+                        <i class="bx bx-home-alt icon fs-5"></i>
+                        <span class="d-flex flex-column text nav-text">Dashboard</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>

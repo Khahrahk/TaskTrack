@@ -5,25 +5,22 @@
       data-framework="laravel"
       data-asset-path="{{ asset('/')}}">
 
-<div class="app-content content" style="height: 100%;">
-    <div class="content-area-wrapper h-100" style="height: 100%;">
-        <div class="d-flex flex-column" style="height: 100%;">
-            <div class="d-flex flex-row" style="height: 100%;">
-                <div class="d-flex flex-column" style="height: 100%;">
-                    <div class="d-flex flex-row" style="height: 100%;">
-                        @include('panels.sidebar')
-                    </div>
-                </div>
-                <div class="d-flex flex-column w-100">
-                    <div class="d-flex flex-row w-100">
-                        @include('panels.navbar')
-                    </div>
-                    <div class="d-flex flex-row" style="height: 100%">
-                        <div class="content-wrapper w-100">
-                            <div class="content-body">
-                                @yield('content')
-                            </div>
-                        </div>
+<div class="d-flex flex-column app-content content h-100">
+    @include('panels.navbar')
+    <div class="d-flex flex-row content-area-wrapper h-100">
+        <div class="d-flex flex-column">
+            <div class="d-flex flex-row h-100">
+                @include('panels.sidebar')
+            </div>
+        </div>
+        <div class="d-flex flex-column w-100">
+            <div class="d-flex flex-row w-100">
+                @yield('header')
+            </div>
+            <div class="d-flex flex-row">
+                <div class="content-wrapper w-100">
+                    <div class="content-body">
+                        @yield('content')
                     </div>
                 </div>
             </div>

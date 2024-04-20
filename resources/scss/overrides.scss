@@ -1,9 +1,10 @@
-//@import './base/bootstrap-extended/include'; // Bootstrap includes
 @import "./partials/form/button";
 @import "./partials/form/input";
+@import "./partials/form/sidebar";
 
 html {
     height: 100%;
+
     body {
         height: 100%;
         font-family: 'Inter', sans-serif;
@@ -23,6 +24,7 @@ html {
     .content {
         &.app-content {
             min-height: calc(100% - 160px) !important;
+
             &.show-overlay {
                 .content-overlay {
                     z-index: 10;
@@ -31,6 +33,7 @@ html {
 
             .content-wrapper {
                 margin: 0 auto;
+
                 &:not(.container-xxl) {
                     max-width: 100%;
                 }
