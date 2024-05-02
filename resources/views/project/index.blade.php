@@ -31,28 +31,6 @@
             background: #fff;
         }
 
-        .img-holder {
-            height: 55px;
-            width: 55px;
-            background-color: #4e63d7;
-            background-image: -webkit-gradient(linear, left top, right top, from(rgba(78, 99, 215, 0.9)), to(#5a85dd));
-            background-image: linear-gradient(to right, rgba(78, 99, 215, 0.9) 0%, #5a85dd 100%);
-            font-family: "Open Sans", sans-serif;
-            color: #fff;
-            font-size: 22px;
-            font-weight: 700;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            border-radius: 5px;
-        }
-
         .profile-image img {
             margin-left: 3px;
         }
@@ -72,36 +50,6 @@
 @endsection
 
 @section('content')
-{{--        <div class="header d-flex flex-column col-lg-12 align-items-center justify-content-center pb-4 pt-4">--}}
-{{--            <div class="d-flex flex-column w-100 align-items-center justify-content-center">--}}
-{{--                <h1 class="d-flex flex-row"><span class="label">Projects</span></h1>--}}
-{{--            </div>--}}
-{{--            <div class="d-flex flex-row pt-3 w-100 align-items-center justify-content-center gap-3">--}}
-{{--                <x-button outline primary label="Create" class="col-1" data-bs-toggle="modal" data-bs-target="#create"/>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="d-flex flex-column col-12 align-items-center pb-4 pt-4">--}}
-{{--            @if(!empty(auth()->user()->userWorkspace))--}}
-{{--                @foreach(auth()->user()->userWorkspace as $workspace)--}}
-{{--                    @if(!empty($workspace->workspace->projects))--}}
-{{--                        @foreach($workspace->workspace->projects as $project)--}}
-{{--                            <div class="d-flex flex-column col-6 p-3">--}}
-{{--                                <div class="d-flex flex-row w-100 align-items-center gap-3">--}}
-{{--                                    <div class="d-flex flex-column w-10">--}}
-{{--                                        <div class="img-holder">--}}
-{{--                                            {{ $project->presenter()->initials }}--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="d-flex flex-column w-50">--}}
-{{--                                        <span><h1>{{ $project->name }}</h1></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        @endforeach--}}
-{{--                    @endif--}}
-{{--                @endforeach--}}
-{{--            @endif--}}
-{{--        </div>--}}
     <div class="card m-5 mt-4">
         <div class="card-body">
             <span>Projects</span>
@@ -115,8 +63,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td>New list</td>
-
+                    <td><x-button outline sm primary label="New project" class="col-1" data-bs-toggle="modal" data-bs-target="#create"/></td>
                 </tr>
                 </tfoot>
             </table>
@@ -161,7 +108,6 @@
 @endsection
 
 @section('vendor-script')
-    <script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ asset(mix('vendors/js/plugins/datatable/jquery.dataTables.min.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/plugins/datatable/dataTables.bootstrap5.min.js')) }}"></script>
     <script src="{{ asset(mix('vendors/js/plugins/datatable/datatables.checkboxes.min.js')) }}"></script>
@@ -172,7 +118,7 @@
     <script>
 
         var table = $('.table').dataTable({
-            // "bPaginate": false,
+            "bPaginate": false,
             "bInfo": false,
             "bFilter": false,
             serverSide: true,

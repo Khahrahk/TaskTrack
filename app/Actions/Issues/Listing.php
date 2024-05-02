@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Actions\Projects;
+namespace App\Actions\Issues;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Project};
+use App\Models\Issue;
 use App\View\Components\Button;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -21,7 +21,7 @@ class Listing
 
     private function buildQuery()
     {
-        $req = Project::query()->whereHas('workspace', fn($query)=>$query->whereHas('users', fn($query)=>$query->where('user_id', Auth::id())));
+        $req = Issue::query()->whereHas('project', fn($query)=>$query->whereHas('workspace', fn($query)=>$query->whereHas('users', fn($query)=>$query->where('user_id', Auth::id()))));
         return $req;
     }
 
@@ -29,8 +29,8 @@ class Listing
     {
         $sorting = str('');
         $result['data'] = $this->buildQuery()->get();
-        $result['data']->transform(static function (Project $project) {
-            $name = Blade::renderComponent((new Button(link: true, label: $project->presenter()->name()))->withAttributes(['primary' => true]));
+        $result['data']->transform(static function (Issue $issue) {
+            $name = Blade::renderComponent((new Button(link: true, label: $issue->presenter()->name()))->withAttributes(['primary' => true]));
             return compact('name');
         });
 
@@ -49,7 +49,6 @@ class Listing
             $sorting = $sorting->append('<div class="table-sort-mobile-item d-flex align-items-center ' . $order . '">' . $render . '</div>');
         });
         $result['sorting'] = $sorting->toString();
-
         return $result;
     }
 }

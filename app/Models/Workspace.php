@@ -30,7 +30,7 @@ class Workspace extends Model
 
     public function creator(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'creator');
+        return $this->belongsTo(User::class, 'creator', 'id');
     }
 
     public function presenter(): WorkspacePresenter

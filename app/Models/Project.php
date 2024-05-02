@@ -19,7 +19,7 @@ class Project extends Model
 
     public function workspace(): BelongsTo
     {
-        return $this->belongsTo(Workspace::class, 'id', 'workspace_id');
+        return $this->belongsTo(Workspace::class, 'workspace_id', 'id');
     }
 
     public function issues(): HasMany

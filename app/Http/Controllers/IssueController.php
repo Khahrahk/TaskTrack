@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Issues\Listing;
 use App\Models\Issue;
 use App\Models\Project;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -37,5 +39,22 @@ class IssueController extends BaseController
         Issue::query()->where('id', '=', $data['id'])->first()->delete();
 
         return redirect(route("issues"));
+    }
+
+    /**
+     * Issue paginated list
+     *
+     * @param Request $request
+     * @return JsonResponse
+     *
+     * @group Issues
+     * @queryParam start int Value to start from. Defaults to 1. Example: 1
+     * @queryParam page int Page number. Defaults to 1. Example: 1
+     * @queryParam length int Page length. Defaults to 10. Example: 10
+     */
+    public function issueList(Request $request): JsonResponse
+    {
+        $result = (new Listing($request))->get();
+        return response()->json($result);
     }
 }

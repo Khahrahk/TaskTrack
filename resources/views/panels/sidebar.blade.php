@@ -6,8 +6,7 @@
                 <span class="d-flex flex-row" style="font-size: 30px; font-weight: 300">T</span>
             </div>
             <div class="d-flex flex-column button-close">
-                <x-button class="toggle-left" size="sm" monochrome outline
-                          iconRight="burger-menu-svgrepo-com"></x-button>
+                <x-button class="toggle-left" size="sm" monochrome outline iconRight="burger-menu-svgrepo-com"></x-button>
             </div>
         </div>
     </header>
@@ -15,19 +14,19 @@
         <div class="menu d-flex flex-row w-100">
             <div class="d-flex flex-column gap-3 w-100 ps-4 pt-3">
                 <div class="d-flex flex-row justify-content-start align-items-center w-100">
-                    <a href="#" class="d-flex flex-row gap-2 align-items-center w-100">
+                    <a href="{{route('dashboard')}}" class="d-flex flex-row gap-2 align-items-center w-100">
                         <i class="bx bx-home-alt icon fs-5"></i>
                         <span class="d-flex flex-column text nav-text">Dashboard</span>
                     </a>
                 </div>
                 <div class="d-flex justify-content-start align-items-center w-100">
-                    <a href="#" class="d-flex flex-row gap-2 align-items-center">
+                    <a href="{{route('projects')}}" class="d-flex flex-row gap-2 align-items-center">
                         <i class="d-flex flex-column bx bx-folder icon fs-5"></i>
                         <span class="d-flex flex-column text nav-text">Projects</span>
                     </a>
                 </div>
                 <div class="d-flex justify-content-start align-items-center w-100">
-                    <a href="#" class="d-flex flex-row gap-2 align-items-center">
+                    <a href="{{route('issues')}}" class="d-flex flex-row gap-2 align-items-center">
                         <i class="d-flex flex-column bx bx-task icon fs-5"></i>
                         <span class="d-flex flex-column text nav-text">Issues</span>
                     </a>

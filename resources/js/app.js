@@ -1,3 +1,3 @@
 import './bootstrap';
 require('./base/sidebar');
-window.$ = require('jquery');
+global.$ = global.jQuery = require('jquery')
