@@ -20,7 +20,7 @@
                     </a>
                 </div>
                 <div class="d-flex justify-content-start align-items-center w-100">
-                    <a href="{{route('projects')}}" class="d-flex flex-row gap-2 align-items-center">
+                    <a href="{{route('projects.index')}}" class="d-flex flex-row gap-2 align-items-center">
                         <i class="d-flex flex-column bx bx-folder icon fs-5"></i>
                         <span class="d-flex flex-column text nav-text">Projects</span>
                     </a>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Issues\Listing;
+use App\Http\Requests\Issue\IssueStoreRequest;
+use App\Http\Requests\Issue\IssueUpdateRequest;
 use App\Models\Issue;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
@@ -11,34 +13,51 @@ use Illuminate\Routing\Controller as BaseController;
 
 class IssueController extends BaseController
 {
-    public function index(){
+    public function index()
+    {
         return view('issue.index');
     }
 
-    public function create(Request $request){
-        $data = $request->validate([
-            "name" => ["required", "string"],
-            "project" => ["required", "integer"],
-        ]);
-
-        Issue::create([
-            "name" => $data["name"],
-            "project_id" => $data['project'],
-            'user_id' => auth()->user()->id,
-            'type' => 3
-        ]);
-
-        return redirect(route("issues"));
+    public function update(IssueUpdateRequest $request)
+    {
+        $validated = $request->validated();
+        try {
+            $issue = Issue::find($validated['id']);
+            $issue->update([
+                'name' => $validated['name'],
+            ]);
+            return ['status' => true];
+        } catch (\Throwable) {
+            return ['status' => false, 'data' => 'Ошибка'];
+        }
     }
 
-    public function delete(Request $request){
-        $data = $request->validate([
-            "id" => ["required"],
-        ]);
+    public function store(IssueStoreRequest $request)
+    {
+        $validated = $request->validated();
+        try {
+            Issue::create([
+                "name" => $validated["name"],
+                "project_id" => 5,
+                'user_id' => auth()->user()->id,
+                'type' => 3
+            ]);
+            return ['status' => true];
+        } catch (\Throwable) {
+            return ['status' => false, 'data' => 'Ошибка'];
+        }
+    }
 
-        Issue::query()->where('id', '=', $data['id'])->first()->delete();
-
-        return redirect(route("issues"));
+    public function delete(Request $request)
+    {
+        $request->validate(['id' => 'required']);
+        try {
+            $issue = Issue::find($request->id);
+            $issue->delete();
+            return ['status' => true];
+        } catch (\Throwable) {
+            return ['status' => false, 'data' => 'Ошибка'];
+        }
     }
 
     /**

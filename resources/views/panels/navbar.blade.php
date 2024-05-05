@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex flex-row w-100 ps-3 pb-1" style="margin: 0; box-shadow: none; border-bottom:  1px solid rgba(0, 0, 0, 0.1)">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex flex-row w-100 ps-3 pb-0 pt-1" style="margin: 0; box-shadow: none; border-bottom:  1px solid rgba(0, 0, 0, 0.1)">
     <div class="container-fluid">
         <a class="navbar-brand  " href="{{route('dashboard')}}">TaskTrack</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">

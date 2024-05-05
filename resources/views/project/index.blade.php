@@ -34,6 +34,11 @@
         .profile-image img {
             margin-left: 3px;
         }
+
+        .feather {
+            width: 16px;
+            height: 16px;
+        }
     </style>
 @endsection
 
@@ -53,53 +58,72 @@
     <div class="card m-5 mt-4">
         <div class="card-body">
             <span>Projects</span>
-            <table id="example" class="display table" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td><x-button outline sm primary label="New project" class="col-1" data-bs-toggle="modal" data-bs-target="#create"/></td>
-                </tr>
-                </tfoot>
-            </table>
+            <div class="table-responsive pt-2">
+                <table class="table no-hover no-header-mobile table-fixed" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="value">Name</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td class="border-0">
+                            <x-button outline sm primary label="New project" class="col-1" data-bs-toggle="modal" data-bs-target="#create-modal"/>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="modal fade" id="create" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="create-modal" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel"
+         data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create project</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{ route("project_create") }}">
+                <form class="w-100" id="form" method="post" action="">
                     <div class="modal-body">
                         @csrf
-                        <div class="form d-flex flex-column gap-3">
-                            <x-input name="name" label-top error-less placeholder="Name" wrapper-class="w-100"
-                                     required/>
-                            <select name="workspace" class="form-select" aria-label="Default select example">
-                                <option selected disabled>Select workspace</option>
-                                @if(!empty(auth()->user()->userWorkspace))
-                                    @foreach(auth()->user()->userWorkspace as $workspace)
-                                        <option
-                                            value="{{$workspace->workspace->id}}">{{$workspace->workspace->name}}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                            @if($errors->any())
-                                <div class="invalid-feedback d-block">{{ $errors->first() }}</div>
-                            @endif
+                        <x-input id="name" name="name" wrapper-class="w-100" label-top label="Name:" autofocus required/>
+                        <div class="modal-footer p-0 mt-2" style="border-top: none">
+                            <div class="d-flex justify-content-end gap-2">
+                                <x-button outline monochrome data-bs-dismiss="modal" label="Cancel"/>
+                                <x-button primary disabled id="submit" type="submit" label="Create"/>
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <x-button outline monochrome label="Close" data-bs-dismiss="modal"/>
-                        <x-button outline primary label="Submit" type="submit"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="update-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Update project</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="w-100" id="form" method="post" action="">
+                    <div class="modal-body">
+                        @csrf
+                        <x-input type="hidden" id="id" name="id"/>
+                        <x-input id="name" name="name" wrapper-class="w-100" class="" label-top label="Name:" autofocus required/>
+                        <div class="modal-footer p-0 mt-2" style="border-top: none">
+                            <div class="d-flex w-100 justify-content-between">
+                                <x-button danger disabled id="delete" label="Delete"/>
+                                <div class="d-flex justify-content-end gap-2">
+                                    <x-button outline monochrome data-bs-dismiss="modal" label="Cancel"/>
+                                    <x-button primary disabled id="submit" type="submit" label="Update"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -116,18 +140,18 @@
 
 @section('page-script')
     <script>
-
         var table = $('.table').dataTable({
             "bPaginate": false,
             "bInfo": false,
             "bFilter": false,
+            "language": {
+                "sZeroRecords": "Nothing to show"
+            },
+            processing: false,
             serverSide: true,
             ajax: {
                 async: true,
-                // data: function (d) {
-                //     d.filter = Object.fromEntries(filtersForm.serializeArray().map(kv => [kv.name, kv.value]));
-                // },
-                url: '{!! route('project.list') !!}',
+                url: '{!! route('projects.list') !!}',
                 type: "GET",
                 dataSrc: function (response) {
                     var $container = $(table.api().table().container());
@@ -154,105 +178,169 @@
             columns: [
                 {data: 'name', width: '250px'},
             ],
-            order: [[0  , 'asc']],
+            order: [],
             dom: 'rt<"datatables-footer d-flex flex-column flex-sm-row align-items-center gap-10px justify-content-between w-100"pl>',
-            language: {
-                lengthMenu: `<select class="selectpicker w-160px" data-container="body">
-                            <option value="10" title="10 на странице">10</option>
-                            <option value="20" title="20 на странице">20</option>
-                            <option value="30" title="30 на странице">30</option>
-                            <option value="40" title="40 на странице">40</option>
-                            <option value="50" title="50 на странице">50</option>
-                            <option value="100" title="100 на странице">100</option>
-                            <option value="250" title="250 на странице">250</option>
-                        </select>`,
-            },
-            drawCallback: function () {
-                var container = this.api().table().container(),
-                    checkboxAll = $(container).find('th.dt-checkboxes-select-all.dt-checkboxes-cell'),
-                    buttonsContainer = $(checkboxAll).parents('.island').find('.multiple-actions .select-all-container');
-                checkboxAll.find('.form-check').addClass('d-none');
-                checkboxAll.find('label').html('Все');
-                buttonsContainer.html(checkboxAll.html());
-                buttonsContainer.find('.d-none').removeClass('d-none');
-                if (!scroll && $(window).width() > 497) {
-                    scroll = new PerfectScrollbar(this.api().table().container());
-                }
-                updateSize();
-                reloadSelects();
-            },
             initComplete: function () {
-                $('.datatables-footer').appendTo('.island-footer-content');
-                $('.selectpicker').selectpicker();
+                let th = $('.table th');
+                th.unbind('click');
+                th.on('click', function (e) {
+                    $(this).blur();
+                    var shift = e.shiftKey,
+                        order = table.api().order(),
+                        colIndex = table.api().column(this).index(),
+                        newOrder = [],
+                        processed = false;
+
+                    for (var i = 0; i < order.length; i++) {
+                        var column = order[i][0],
+                            direction = order[i][1];
+
+                        if (column === colIndex) {
+                            if (direction === 'asc') {
+                                newOrder.push([colIndex, 'desc']);
+                                processed = true;
+                            } else if (direction === 'desc') {
+                                table.api().order([]).draw();
+                                processed = true;
+                            }
+                        } else if (shift) {
+                            newOrder.push(order[i]);
+                        }
+                    }
+                    if (!processed) newOrder.push([colIndex, 'asc']);
+                    table.api().order(newOrder).draw();
+                });
             },
             responsive: {
                 breakpoints: [{
                     name: 'mobile-l',
                     width: 576
                 }],
-                // details: {
-                //     display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                //     type: 'none',
-                //     target: '',
-                //     renderer: function (api, rowIdx, columns) {
-                //         var [fullName, department, group, team, email, phone, telegram, questions] = $.map(columns, function (col, i) {
-                //             return col.data;
-                //         });
-                //         var str = `<tr class="w-100 d-inline-table"><td>
-                //             <div class="shipment-mobile">
-                //                 <div class="header">
-                //                     <div class="title">
-                //                         <div class="name">
-                //                             ${fullName}
-                //                         </div>
-                //                     </div>`;
-                //         str += `</div>
-                //                 <div class="content">
-                //                     <div class="basic-info">`;
-                //         if (department !== '' && department !== '---') {
-                //             str += `<div class="d-flex flex-column gap-5px">
-                //                             <span>Департамент:</span>
-                //                             <span>${department}</span>
-                //                         </div>`;
-                //         }
-                //         if (group !== '' && group !== '---') {
-                //             str += `<div class="d-flex flex-column gap-5px">
-                //                             <span>Отдел:</span>
-                //                             <span>${group}</span>
-                //                         </div>`;
-                //         }
-                //         if (team !== '' && team !== '---') {
-                //             str += `<div class="d-flex flex-column gap-5px">
-                //                             <span>Команда:</span>
-                //                             <span>${team}</span>
-                //                         </div>`;
-                //         }
-                //         str += `<button class="l-button align-items-center d-inline-flex justify-content-center size-md type-link color-primary toggle-mod">показать подробности</button>
-                //                     </div>
-                //                     <div class="extended-info collapse">`;
-                //         if (email !== '' && email !== '---') {
-                //             str += `<div class="d-flex flex-column gap-5px">
-                //                             <span>E-mail:</span>
-                //                             <span>${email}</span>
-                //                         </div>`;
-                //         }
-                //         if (phone !== '' && phone !== '---') {
-                //             str += `<div class="d-flex flex-column gap-5px">
-                //                             <span>Телефон:</span>
-                //                             <span>${phone}</span>
-                //                         </div>`;
-                //         }
-                //         if (telegram !== '' && telegram !== '---') {
-                //             str += `<div class="d-flex flex-column gap-5px">
-                //                             <span>Телеграм:</span>
-                //                             <span>${telegram}</span>
-                //                         </div>`;
-                //         }
-                //         str += `</div></div></div></td></tr>`;
-                //         return str;
-                //     }
-                // },
             },
+        });
+
+        var updateModal = $('.modal#update-modal');
+        var createModal = $('.modal#create-modal');
+
+        createModal.on('shown.bs.modal', function (e) {
+            $(e.currentTarget).find('#submit').prop('disabled', false);
+            $(this).find('input[autofocus]').focus();
+        })
+
+        createModal.on('hidden.bs.modal', function (e) {
+            $(e.currentTarget).find('#submit').prop('disabled', true);
+        })
+
+        createModal.on('submit', 'form', function (e) {
+            e.preventDefault();
+            var form = $(this);
+            let dangerLabel = $('#danger-label-create');
+            var formData = new FormData(form[0]);
+            $.ajax({
+                type: 'POST',
+                url: '{!! route('projects.store') !!}',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: () => {
+                    table.api().ajax.reload();
+                    createModal.modal('toggle');
+                    if(dangerLabel.length > 0){
+                        dangerLabel.remove();
+                        $('.has-error').removeClass("has-error");
+                    }
+                    setTimeout(() => {
+                        form.trigger('reset');
+                    }, 300);
+                },
+                error: response => {
+                    if(dangerLabel.length > 0) {
+                        dangerLabel.remove();
+                        $('.has-error').removeClass("has-error");
+                    }
+                    $.each(response.responseJSON.errors, function (key, value) {
+                        var input = form.find(`input[name=${key}]`),
+                            inputContainer = input.parent().parent(),
+                            errorContainer = inputContainer.find('label.text-danger-500');
+                        var svg = feather.icons['x'].toSvg({class: 'icon-wrapper', height: 10})
+                        if (errorContainer.length) {
+                            errorContainer.html(svg + value[0]);
+                        } else {
+                            inputContainer.append(`<label class="text-danger" id='danger-label-create' for="${input.attr('id')}">${svg} ${value[0]}</label>`);
+                        }
+                        input.addClass('has-error');
+                    });
+                },
+            });
+        });
+
+        updateModal.on('shown.bs.modal', function (e) {
+            $(e.currentTarget).find('input[name="id"]').val($(e.relatedTarget).data('id'));
+            $(e.currentTarget).find('input[name="name"]').val($(e.relatedTarget).data('name'));
+            $(e.currentTarget).find('#submit').prop('disabled', false);
+            $(e.currentTarget).find('#delete').prop('disabled', false);
+            $(this).find('input[autofocus]').focus();
+        })
+
+        updateModal.on('hidden.bs.modal', function (e) {
+            $(e.currentTarget).find('#submit').prop('disabled', true);
+            $(e.currentTarget).find('#delete').prop('disabled', true);
+        })
+
+        updateModal.on('submit', 'form', function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var formData = new FormData(form[0]);
+            $.ajax({
+                type: 'POST',
+                url: '{!! route('projects.update') !!}',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: () => {
+                    table.api().ajax.reload();
+                    updateModal.modal('toggle');
+                    setTimeout(() => {
+                        form.trigger('reset');
+                    }, 300);
+                },
+                error: response => {
+                    $.each(response.responseJSON.errors, function (key, value) {
+                        var input = form.find(`input[name=${key}]`),
+                            inputContainer = input.parent().parent(),
+                            errorContainer = inputContainer.find('label.text-danger-500');
+                        var svg = feather.icons['x'].toSvg({class: 'icon-wrapper'})
+                        if (errorContainer.length) {
+                            errorContainer.html(svg + value[0]);
+                        } else {
+                            inputContainer.append(`<label class="text-danger" for="${input.attr('id')}">${svg} ${value[0]}</label>`);
+                        }
+                        input.addClass('has-error');
+                    });
+                },
+            });
+        });
+
+        updateModal.find('#delete').on('click', function () {
+            var form = updateModal.find('#form');
+            var formData = new FormData(form[0]);
+            $.ajax({
+                type: 'POST',
+                url: '{!! route('projects.delete') !!}',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: () => {
+                    table.api().ajax.reload();
+                    updateModal.modal('toggle');
+                    setTimeout(() => {
+                        form.trigger('reset');
+                    }, 300);
+                },
+            });
         });
     </script>
 @endsection

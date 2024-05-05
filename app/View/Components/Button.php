@@ -130,6 +130,7 @@ class Button extends BaseComponent
     {
         return [
             'default' => 'type-primary color-accent',
+            'primary' => 'type-primary color-primary',
             'accent' => 'type-primary color-accent',
             'monochrome' => 'type-primary color-monochrome',
             'danger' => 'type-primary color-danger',

@@ -49,7 +49,7 @@
                   iconRight="burger-menu-svgrepo-com"></x-button>
 
         <div class="container-fluid">
-
+            {{ $project->presenter()->name() }}
         </div>
     </nav>
 @endsection

@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-    <div class="d-flex flex-row justify-content-center pt-5">
+    <div class="d-flex flex-row justify-content-center pt-5 w-100">
         <h1><span class="label">Dashboard</span></h1>
     </div>
 @endsection

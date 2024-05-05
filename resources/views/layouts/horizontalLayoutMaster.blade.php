@@ -17,9 +17,9 @@
             <div class="d-flex flex-row w-100">
                 @yield('header')
             </div>
-            <div class="d-flex flex-row">
-                <div class="content-wrapper w-100">
-                    <div class="content-body">
+            <div class="d-flex flex-row content-area-wrapper h-100">
+                <div class="d-flex flex-column w-100">
+                    <div class="d-flex flex-row h-100">
                         @yield('content')
                     </div>
                 </div>
