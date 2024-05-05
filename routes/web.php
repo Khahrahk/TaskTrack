@@ -23,13 +23,12 @@ Route::middleware("auth:web")->group(function () {
     Route::post('/workspace_create', [\App\Http\Controllers\WorkspaceController::class, 'create'])->name('workspace_create');
     Route::post('/workspace_join', [\App\Http\Controllers\WorkspaceController::class, 'join'])->name('workspace_join');
 
-    Route::get('/projects', [\App\Http\Controllers\ProjectController::class, 'index'])->name('projects');
-    Route::post('/project_create', [\App\Http\Controllers\ProjectController::class, 'create'])->name('project_create');
+    Route::prefix('projects')->as('projects.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ProjectController::class, 'index'])->name('index');;
+        Route::get('/{id}', [\App\Http\Controllers\ProjectController::class, 'show'])->name('show');
+    });
 
     Route::get('/issues', [\App\Http\Controllers\IssueController::class, 'index'])->name('issues');
-    Route::post('/issue_create', [\App\Http\Controllers\IssueController::class, 'create'])->name('issue_create');
-    Route::post('/issue_archive', [\App\Http\Controllers\IssueController::class, 'archive'])->name('issue_archive');
-    Route::post('/issue_delete', [\App\Http\Controllers\IssueController::class, 'delete'])->name('issue_delete');
 
     Route::get('/agiles', [\App\Http\Controllers\AgileController::class, 'index'])->name('agiles');
 });

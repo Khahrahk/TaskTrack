@@ -945,6 +945,10 @@
                     border-right: 1px solid $accent-600;
                 }
 
+                &.color-primary {
+                    border-right: 1px solid $info-600;
+                }
+
                 &.color-monochrome {
                     border-right: 1px solid $monochrome-900;
                 }
@@ -974,6 +978,10 @@
         &.type-primary {
             &.color-accent {
                 background: $accent-600;
+            }
+
+            &.color-primary {
+                background: $info-600;
             }
 
             &.color-monochrome {
@@ -1591,6 +1599,27 @@
 
             &:disabled, &.disabled {
                 background: $accent-100;
+            }
+        }
+
+        &.color-primary {
+            background: $info-500;
+
+            &:hover:not(:disabled):not(.disabled):not(.show):not(:active) {
+                background: $info-400;
+                box-shadow: 0 0 5px rgba(103, 231, 240, 0.5);
+            }
+
+            &:focus-visible:not(:disabled):not(.disabled) {
+                background: $info-400;
+            }
+
+            &:active:not(:disabled):not(.disabled), &.show {
+                background: $info-600;
+            }
+
+            &:disabled, &.disabled {
+                background: $info-100;
             }
         }
 

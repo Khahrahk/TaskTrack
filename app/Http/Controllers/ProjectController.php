@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Projects\Listing;
+use App\Http\Requests\Project\ProjectStoreRequest;
+use App\Http\Requests\Project\ProjectUpdateRequest;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,18 +16,49 @@ class ProjectController extends BaseController
         return view('project.index');
     }
 
-    public function create(Request $request){
-        $data = $request->validate([
-            "name" => ["required", "string"],
-            "workspace" => ["required", "integer"],
-        ]);
+    public function show(Request $request){
+        $project = Project::find($request->id);
+        return view('project.show', compact('project'));
+    }
 
-        $project = Project::create([
-            "name" => $data["name"],
-            "workspace_id" => $data['workspace'],
-        ]);
+    public function update(ProjectUpdateRequest $request)
+    {
+        $validated = $request->validated();
+        try {
+            $issue = Project::find($validated['id']);
+            $issue->update([
+                'name' => $validated['name'],
+            ]);
+            return ['status' => true];
+        } catch (\Throwable) {
+            return ['status' => false, 'data' => 'Ошибка'];
+        }
+    }
 
-        return redirect(route("projects"));
+    public function store(ProjectStoreRequest $request)
+    {
+        $validated = $request->validated();
+        try {
+            Project::create([
+                "name" => $validated["name"],
+                "workspace_id" => $validated['workspace'],
+            ]);
+            return ['status' => true];
+        } catch (\Throwable) {
+            return ['status' => false, 'data' => 'Ошибка'];
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        $request->validate(['id' => 'required']);
+        try {
+            $issue = Project::find($request->id);
+            $issue->delete();
+            return ['status' => true];
+        } catch (\Throwable) {
+            return ['status' => false, 'data' => 'Ошибка'];
+        }
     }
 
     /**
@@ -38,8 +71,6 @@ class ProjectController extends BaseController
      * @queryParam start int Value to start from. Defaults to 1. Example: 1
      * @queryParam page int Page number. Defaults to 1. Example: 1
      * @queryParam length int Page length. Defaults to 10. Example: 10
-     * @queryParam order object order[key] = filter_value column int order[column] Column. 0 - fullName, 1 - department, 2 - group, 3 - team, 4 - email, 5 - phone, 6 - telegram, 7 - questions. Enum: 0, 1, 2, 3, 4, 5, 6, 7. Example: {"column": 0, "dir": "asc"}
-     * @queryParam filter object filter[key] = filter_value Filters. Supported keys: 'fullName', 'department', 'group', 'team', 'email', 'phone', 'telegram', 'questions'. Example: [{"fullName": "Алекс"}]
      */
     public function projectList(Request $request): JsonResponse
     {

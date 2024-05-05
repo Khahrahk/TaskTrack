@@ -13,6 +13,7 @@
         "bootstrap": "^5.3.3",
         "bootstrap-icons": "^1.11.3",
         "dotenv": "^16.4.5",
+        "feather-icons": "^4.29.2",
         "glob": "^10.3.10",
         "webpack": "^5.90.3"
     },
