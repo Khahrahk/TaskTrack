@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('issues', function (Blueprint $table) {
-            $table->integer('status')->nullable();
+            $table->foreignIdFor(\App\Models\Status::class,'status_id')->nullable()->constrained();
+            $table->foreignIdFor(\App\Models\Priority::class,'priority_id')->nullable()->constrained();
         });
     }
 
@@ -22,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('issues', function (Blueprint $table) {
-            $table->dropColumn('status');
+            $table->dropForeign('status_id');
+            $table->dropForeign('priority_id');
         });
     }
 };

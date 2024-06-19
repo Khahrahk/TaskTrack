@@ -28,7 +28,10 @@ Route::middleware("auth:web")->group(function () {
         Route::get('/{id}', [\App\Http\Controllers\ProjectController::class, 'show'])->name('show');
     });
 
-    Route::get('/issues', [\App\Http\Controllers\IssueController::class, 'index'])->name('issues');
+    Route::prefix('issues')->as('issues.')->group(function () {
+        Route::get('/list', [\App\Http\Controllers\IssueController::class, 'index'])->name('index');;
+        Route::get('/board', [\App\Http\Controllers\IssueController::class, 'board'])->name('board');
+    });
 
     Route::get('/agiles', [\App\Http\Controllers\AgileController::class, 'index'])->name('agiles');
 });

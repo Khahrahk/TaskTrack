@@ -48,4 +48,4 @@ mixAssetsDir('js/plugins/**/*.js', (src, dest) => mix.scripts(src, dest))
 
 mix.copyDirectory('resources/images', 'public/images')
 
-mix.js(['resources/js/app.js', 'resources/js/bootstrap.js'], 'public/js')
+mix.js(['resources/js/app.js', 'resources/js/bootstrap.js'], 'public/js').vue()

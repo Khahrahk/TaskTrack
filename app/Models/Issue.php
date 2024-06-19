@@ -16,12 +16,24 @@ class Issue extends Model
         'name',
         'type',
         'user_id',
-        'project_id'
+        'project_id',
+        'status_id',
+        'order_position'
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id', 'user_id');
+    }
+
+    public function priority(): BelongsTo
+    {
+        return $this->belongsTo(Priority::class, 'priority_id', 'id');
+    }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
     public function project(): BelongsTo
