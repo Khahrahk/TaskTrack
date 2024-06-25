@@ -12,6 +12,7 @@ class IssueUpdateRequest extends FormRequest
         return [
             'id' => 'required',
             'name' => ['required', Rule::unique('issues')->ignore($this->id)],
+            'status' => 'required',
         ];
     }
 

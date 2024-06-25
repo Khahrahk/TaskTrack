@@ -11,7 +11,7 @@ class ProjectUpdateRequest extends FormRequest
     {
         return [
             'id' => 'required',
-            'name' => ['required', Rule::unique('cash_flow_groups')->ignore($this->id)],
+            'name' => ['required', Rule::unique('projects')->ignore($this->id)],
         ];
     }
 

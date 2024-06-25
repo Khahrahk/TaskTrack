@@ -34,5 +34,4 @@
 {{-- include default scripts --}}
 @include('panels/scripts')
 </body>
-
 </html>

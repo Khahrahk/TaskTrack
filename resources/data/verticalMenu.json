@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Dashboard",
+        "slug": "dashboard",
+        "icon": "<i class=\"bx bx-home-alt icon fs-5\"></i>\n",
+        "url": "dashboard"
+    },
+    {
+        "name": "Projects",
+        "slug": "projects",
+        "icon": "<i class=\"d-flex flex-column bx bx-folder icon fs-5\"></i>",
+        "url": "projects.index"
+    },
+    {
+        "name": "Issues",
+        "slug": "issues",
+        "icon": "<i class=\"d-flex flex-column bx bx-task icon fs-5\"></i>",
+        "url": "issues.index"
+    }
+]

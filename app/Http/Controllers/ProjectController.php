@@ -13,12 +13,21 @@ use Illuminate\Routing\Controller as BaseController;
 class ProjectController extends BaseController
 {
     public function index(){
-        return view('project.index');
+        return view('project.index', [
+            'pageSubmenu' => [
+                ['link' => 'projects.index', 'name' => "List"],
+            ],
+        ]);
     }
 
     public function show(Request $request){
         $project = Project::find($request->id);
-        return view('project.show', compact('project'));
+        return view('project.show', [
+            'project' => $project,
+            'pageSubmenu' => [
+                ['link' => 'projects.index', 'name' => "List"],
+            ],
+        ]);
     }
 
     public function update(ProjectUpdateRequest $request)
@@ -41,7 +50,7 @@ class ProjectController extends BaseController
         try {
             Project::create([
                 "name" => $validated["name"],
-                "workspace_id" => $validated['workspace'],
+                "workspace_id" => 1,
             ]);
             return ['status' => true];
         } catch (\Throwable) {

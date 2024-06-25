@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('issues', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(\App\Models\User::class,'user_id');
-            $table->foreignIdFor(\App\Models\Project::class,'project_id');
-            $table->string('type');
+            $table->string('description')->nullable();
+            $table->foreignIdFor(\App\Models\User::class,'user_id')->constrained();
+            $table->foreignIdFor(\App\Models\Project::class,'project_id')->constrained();
             $table->timestamps();
         });
     }
