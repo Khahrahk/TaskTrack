@@ -91,8 +91,7 @@
                     <tfoot>
                     <tr>
                         <td class="border-0">
-                            <x-button outline sm primary label="New issue" class="col-1" data-bs-toggle="modal"
-                                      data-bs-target="#create-modal"/>
+                            <x-button outline sm primary label="New issue" data-bs-toggle="modal" data-bs-target="#create-modal"/>
                         </td>
                     </tr>
                     </tfoot>
