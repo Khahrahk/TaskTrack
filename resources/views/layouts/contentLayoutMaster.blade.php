@@ -18,6 +18,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#f8f8f8">
     <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
     <meta name="theme-color" content="#f8f8f8">
+    @routes
+    <!-- CDNJS :: Sortable (https://cdnjs.com/) -->
+    <script src="//cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+    <!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
     @include('panels/styles')
 </head>
 @isset($configData['mainLayoutType'])

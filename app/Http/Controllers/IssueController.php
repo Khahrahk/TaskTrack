@@ -7,6 +7,7 @@ use App\Http\Requests\Issue\IssueStoreRequest;
 use App\Http\Requests\Issue\IssueUpdateRequest;
 use App\Models\Issue;
 use App\Models\Project;
+use App\Models\Status;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -15,7 +16,25 @@ class IssueController extends BaseController
 {
     public function index()
     {
-        return view('issue.index');
+
+        return view('issue.index', [
+            'pageSubmenu' => [
+                ['link' => 'issues.index', 'name' => "List"],
+                ['link' => 'issues.board', 'name' => "Board"],
+            ],
+        ]);
+    }
+
+    public function board()
+    {
+        $statuses = Status::query()->with('issues')->get();
+        return view('issue.board', [
+            'statuses' => $statuses,
+            'pageSubmenu' => [
+                ['link' => 'issues.index', 'name' => "List"],
+                ['link' => 'issues.board', 'name' => "Board"],
+            ],
+        ]);
     }
 
     public function update(IssueUpdateRequest $request)
@@ -25,10 +44,12 @@ class IssueController extends BaseController
             $issue = Issue::find($validated['id']);
             $issue->update([
                 'name' => $validated['name'],
+                'status_id' => $validated['status'],
             ]);
             return ['status' => true];
-        } catch (\Throwable) {
-            return ['status' => false, 'data' => 'Ошибка'];
+        } catch (\Throwable $e) {
+            report($e);
+            return ['status' => false, 'data' => "Ошибка: " . $e->getMessage()];
         }
     }
 
@@ -38,13 +59,13 @@ class IssueController extends BaseController
         try {
             Issue::create([
                 "name" => $validated["name"],
-                "project_id" => 5,
+                "project_id" => 1,
                 'user_id' => auth()->user()->id,
-                'type' => 3
             ]);
             return ['status' => true];
-        } catch (\Throwable) {
-            return ['status' => false, 'data' => 'Ошибка'];
+        } catch (\Throwable $e) {
+            report($e);
+            return ['status' => false, 'data' => "Ошибка: " . $e->getMessage()];
         }
     }
 
@@ -55,8 +76,29 @@ class IssueController extends BaseController
             $issue = Issue::find($request->id);
             $issue->delete();
             return ['status' => true];
-        } catch (\Throwable) {
-            return ['status' => false, 'data' => 'Ошибка'];
+        } catch (\Throwable $e) {
+            report($e);
+            return ['status' => false, 'data' => "Ошибка: " . $e->getMessage()];
+        }
+    }
+
+    public function reorder(Request $request)
+    {
+        $validated = $request->validate(['tasksArray' => 'required']);
+        try {
+            foreach ($validated['tasksArray'] as $statusId => $status) {
+                foreach ($status as $issuePosition => $issueId) {
+                    $issue = Issue::find($issueId);
+                    $issue->update([
+                        'status_id' => $statusId,
+                        'order_position' => (int)$issuePosition,
+                    ]);
+                }
+            }
+            return ['status' => true];
+        } catch (\Throwable $e) {
+            report($e);
+            return ['status' => false, 'data' => "Ошибка: " . $e->getMessage()];
         }
     }
 

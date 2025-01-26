@@ -10,7 +10,7 @@ class ProjectStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::unique('cash_flow_groups')],
+            'name' => ['required', Rule::unique('projects')],
         ];
     }
 

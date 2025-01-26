@@ -43,15 +43,7 @@
 @endsection
 
 @section('header')
-    <nav class="navbar navbar-page navbar-expand-lg bg-white d-flex flex-row w-100 ps-3 pb-1"
-         style="margin: 0; box-shadow: none; border-bottom:  1px solid rgba(0, 0, 0, 0.1); height: 45px">
-        <x-button class="toggle-right close" size="sm" monochrome outline
-                  iconRight="burger-menu-svgrepo-com"></x-button>
-
-        <div class="container-fluid">
-            {{ $project->presenter()->name() }}
-        </div>
-    </nav>
+    @include('components.nav', $pageSubmenu)
 @endsection
 
 @section('content')
@@ -72,8 +64,7 @@
                     <tfoot>
                     <tr>
                         <td class="border-0">
-                            <x-button outline sm primary label="New issue" class="col-1" data-bs-toggle="modal"
-                                      data-bs-target="#create-modal"/>
+                            <x-button outline sm primary label="New issue" data-bs-toggle="modal" data-bs-target="#create-modal"/>
                         </td>
                     </tr>
                     </tfoot>

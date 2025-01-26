@@ -1,4 +1,11 @@
 import './bootstrap';
 global.feather = require('feather-icons');
-global.$ = global.jQuery = require('jquery')
+global.$ = global.jQuery = require('jquery');
 require('./base/sidebar');
+import { createApp } from 'vue';
+import Issue from "./components/IssueBoard.vue";
+import Counter from "./components/Counter.vue";
+const app = createApp();
+app.component('counter', Counter);
+app.component('issue', Issue);
+app.mount('#app');
