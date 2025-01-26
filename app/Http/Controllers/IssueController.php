@@ -47,8 +47,9 @@ class IssueController extends BaseController
                 'status_id' => $validated['status'],
             ]);
             return ['status' => true];
-        } catch (\Throwable) {
-            return ['status' => false, 'data' => 'Ошибка'];
+        } catch (\Throwable $e) {
+            report($e);
+            return ['status' => false, 'data' => "Ошибка: " . $e->getMessage()];
         }
     }
 
@@ -62,8 +63,9 @@ class IssueController extends BaseController
                 'user_id' => auth()->user()->id,
             ]);
             return ['status' => true];
-        } catch (\Throwable) {
-            return ['status' => false, 'data' => 'Ошибка'];
+        } catch (\Throwable $e) {
+            report($e);
+            return ['status' => false, 'data' => "Ошибка: " . $e->getMessage()];
         }
     }
 
@@ -74,8 +76,29 @@ class IssueController extends BaseController
             $issue = Issue::find($request->id);
             $issue->delete();
             return ['status' => true];
-        } catch (\Throwable) {
-            return ['status' => false, 'data' => 'Ошибка'];
+        } catch (\Throwable $e) {
+            report($e);
+            return ['status' => false, 'data' => "Ошибка: " . $e->getMessage()];
+        }
+    }
+
+    public function reorder(Request $request)
+    {
+        $validated = $request->validate(['tasksArray' => 'required']);
+        try {
+            foreach ($validated['tasksArray'] as $statusId => $status) {
+                foreach ($status as $issuePosition => $issueId) {
+                    $issue = Issue::find($issueId);
+                    $issue->update([
+                        'status_id' => $statusId,
+                        'order_position' => (int)$issuePosition,
+                    ]);
+                }
+            }
+            return ['status' => true];
+        } catch (\Throwable $e) {
+            report($e);
+            return ['status' => false, 'data' => "Ошибка: " . $e->getMessage()];
         }
     }
 

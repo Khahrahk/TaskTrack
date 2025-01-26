@@ -1,0 +1,82 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+.board {
+    overflow: scroll;
+    background-position: center;
+    background-size: cover;
+}
+
+#todo-form input {
+    border-radius: 4px;
+    border: 1px solid black;
+    background: white;
+    font-size: 14px;
+    outline: none;
+}
+
+#todo-form button {
+    border-radius: 4px;
+    border: 1px solid black;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.lanes {
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    overflow: scroll;
+    height: 100%;
+}
+
+.heading {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.swim-lane {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1 1 0;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.task {
+    background: white;
+    color: black;
+    border: 1px solid black;
+    padding: 12px;
+    border-radius: 4px;
+
+    font-size: 16px;
+    cursor: move;
+}
+
+.task .issue-name {
+    font-size: 14px;
+}
+
+.task .project-name {
+    font-size: 11px;
+}
+
+.is-dragging {
+    scale: 1.05;
+    color: white;
+}
